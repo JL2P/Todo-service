@@ -26,6 +26,7 @@ public class TodoAddDto  {
     public Todo toEntity() {
         return Todo.builder()
                 .title(this.title)
+                .description(this.description)
                 .category(this.category)
                 .writer(this.writer)
                 .endTime(this.endTime)

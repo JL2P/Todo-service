@@ -21,12 +21,16 @@ public class TodoModifyDto {
         this.endTime = todo.getEndTime();
     }
 
-    public Todo toEntity() {
+    public Todo toEntity(Todo todo) {
         return Todo.builder()
                 .id(this.id)
                 .title(this.title)
                 .category(this.category)
                 .endTime(this.endTime)
+                .description(this.description)
+                .groupAt(todo.getGroupAt())
+                .writer(todo.getWriter())
+                .likePoint(todo.getLikePoint())
                 .build();
     }
 }

@@ -25,7 +25,7 @@ public class TodoServiceImpl implements TodoService {
     @Override
     public Todo getTodo(Long todoId) throws NoSuchElementException {
         //데이터가 하나도 없을 경우 빈 group객체 반환
-        if(isExist(todoId)) return new Todo();
+        if(!isExist(todoId)) return new Todo();
 
         return todoRepository.findById(todoId).orElseThrow(()-> new NoSuchElementException());
     }

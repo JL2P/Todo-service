@@ -46,7 +46,10 @@ public class TodoController {
     @ApiOperation(value="TODO 수정", notes="메인페이지에서 TODO를 수정한다.")
     @PutMapping
     public TodoModifyDto modifyTodo(@RequestBody TodoModifyDto todoModifyDto){
-        todoService.modifyTodo(todoModifyDto.toEntity());
+        Todo todo = todoModifyDto.toEntity(todoService.getTodo(todoModifyDto.getId()));
+        System.out.println(todo.toString());
+
+        todoService.modifyTodo(todoModifyDto.toEntity(todoService.getTodo(todoModifyDto.getId())));
         return todoModifyDto;
     }
 
