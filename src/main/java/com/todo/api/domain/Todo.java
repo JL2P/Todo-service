@@ -16,6 +16,7 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String imgUrl;      // 이미지 URL
     private String title;       // 제목
     private String description; // 설명글
     private String category;    // 카테고리

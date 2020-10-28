@@ -24,6 +24,7 @@ public class TodoModifyDto {
     public Todo toEntity(Todo todo) {
         return Todo.builder()
                 .id(this.id)
+                .imgUrl(todo.getImgUrl())
                 .title(this.title)
                 .category(this.category)
                 .endTime(this.endTime)

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TodoAddDto  {
     private String title;       // 제목
+    private String imgUrl;      // 이미지 URL
     private String description; // 설명글
     private String category;    // 카테고리
     private String writer;      // 작성자ID
@@ -16,6 +17,7 @@ public class TodoAddDto  {
 
     public TodoAddDto(Todo todo){
         this.title = todo.getTitle();
+        this.imgUrl = todo.getImgUrl();
         this.description = todo.getDescription();
         this.category = todo.getCategory();
         this.writer = todo.getWriter();
@@ -26,6 +28,7 @@ public class TodoAddDto  {
     public Todo toEntity() {
         return Todo.builder()
                 .title(this.title)
+                .imgUrl(this.imgUrl)
                 .description(this.description)
                 .category(this.category)
                 .writer(this.writer)
