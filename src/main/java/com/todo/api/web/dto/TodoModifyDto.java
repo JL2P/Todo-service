@@ -1,29 +1,24 @@
 package com.todo.api.web.dto;
 
 import com.todo.api.domain.Todo;
-import lombok.*;
-
-
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class TodoDto  {
+public class TodoModifyDto {
     private long id;            // Id
     private String title;       // 제목
     private String description; // 설명글
     private String category;    // 카테고리
-    private String writer;      // 작성자ID
     private String endTime;     // 마감일자
-    private String groupAt;     // 그룹계획여부
 
-    public TodoDto(Todo todo){
+    public TodoModifyDto(Todo todo){
         this.id = todo.getId();
         this.title = todo.getTitle();
         this.description = todo.getDescription();
         this.category = todo.getCategory();
-        this.writer = todo.getWriter();
         this.endTime = todo.getEndTime();
-        this.groupAt = todo.getGroupAt();
     }
 
     public Todo toEntity() {
@@ -31,9 +26,7 @@ public class TodoDto  {
                 .id(this.id)
                 .title(this.title)
                 .category(this.category)
-                .writer(this.writer)
                 .endTime(this.endTime)
-                .groupAt(this.groupAt)
                 .build();
     }
 }
