@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = "todos")
-public class Todo {
+public class Todo extends CommonDateEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,4 +25,5 @@ public class Todo {
     private String groupAt;     // 그룹계획여부
     @Column(columnDefinition = "integer default 0")
     private int likePoint;           // 좋아요
+
 }
