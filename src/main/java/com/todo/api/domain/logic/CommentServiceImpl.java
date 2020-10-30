@@ -1,10 +1,12 @@
 package com.todo.api.domain.logic;
 
 import com.todo.api.domain.Comment;
+import com.todo.api.domain.SubComment;
 import com.todo.api.domain.Todo;
 import com.todo.api.domain.service.CommentService;
 import com.todo.api.exception.CommentExistException;
 import com.todo.api.repository.CommentRepository;
+import com.todo.api.repository.SubCommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -16,20 +18,17 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class CommentServiceImpl implements CommentService {
-
+    private final SubCommentRepository subCommentRepository;
     private final CommentRepository commentRepository;
 
     @Override
-    public List<Comment> getComments(Long todoId) throws NoSuchElementException {
-
-        List<Comment> comments = commentRepository.findAllComments(todoId);
-        return comments;
+    public List<Comment> getComments(Todo todo) throws NoSuchElementException {
+        return commentRepository.findByTodo(todo);
     }
-
 
     @Override
     public Comment getComment(Long commentId) throws NoSuchElementException {
-        //데이터가 하나도 없을 경우 빈 group객체 반환
+        //데이터가 하나도 없을 경우 빈 comment객체 반환
         if(!isExist(commentId)) return new Comment();
 
         return commentRepository.findById(commentId).orElseThrow(()-> new NoSuchElementException());
@@ -38,6 +37,11 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void addComment(Comment comment) throws CommentExistException {
         commentRepository.save(comment);
+    }
+
+    @Override
+    public void addSubComment(SubComment subComment) throws NoSuchElementException {
+        subCommentRepository.save(subComment);
     }
 
     @Override

@@ -1,11 +1,13 @@
 package com.todo.api.web;
 
 import com.todo.api.domain.Comment;
+import com.todo.api.domain.SubComment;
 import com.todo.api.domain.Todo;
 import com.todo.api.domain.service.CommentService;
 import com.todo.api.domain.service.TodoService;
 import com.todo.api.web.dto.CommentAddDto;
 import com.todo.api.web.dto.CommentDto;
+import com.todo.api.web.dto.SubCommentAddDto;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -24,10 +26,9 @@ public class CommentController {
 
     @GetMapping("/{todoId}/comments")
     public List<CommentDto> getComments(@PathVariable Long todoId){
-        List<Comment> comments = commentService.getComments(todoId);
-        comments.stream().forEach(comment -> System.out.println(comment));
 
-       return comments.stream().map(comment -> new CommentDto(comment)).collect(Collectors.toList());
+        List<Comment> comments = commentService.getComments(todoService.getTodo(todoId));
+        return comments.stream().map(comment -> new CommentDto(comment)).collect(Collectors.toList());
     }
 
     @PostMapping("/{todoId}/comments")
@@ -36,5 +37,12 @@ public class CommentController {
         Comment comment = commentAddDto.toEntity(todo);
         commentService.addComment(comment);
         return commentAddDto;
+    }
+
+    @PostMapping("/{todoId}/comments/{commentId}")
+    public SubCommentAddDto addCommentToSubComment(@PathVariable Long todoId,Long commentId, @RequestBody SubCommentAddDto subCommentAddDto){
+        Comment comment = commentService.getComment(commentId);
+        commentService.addSubComment(subCommentAddDto.toDomain(comment));
+        return subCommentAddDto;
     }
 }
