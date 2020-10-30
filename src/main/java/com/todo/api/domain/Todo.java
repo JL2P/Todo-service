@@ -3,6 +3,8 @@ package com.todo.api.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @ToString
 @AllArgsConstructor
@@ -11,7 +13,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = "todos")
-public class Todo {
+public class Todo extends CommonDateEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,4 +27,9 @@ public class Todo {
     private String groupAt;     // 그룹계획여부
     @Column(columnDefinition = "integer default 0")
     private int likePoint;           // 좋아요
+
+    @Builder.Default
+    @OneToMany(mappedBy = "todo", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private List<Comment> comments= new ArrayList<Comment>();
+
 }

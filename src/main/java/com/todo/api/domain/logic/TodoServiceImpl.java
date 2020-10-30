@@ -5,6 +5,7 @@ import com.todo.api.domain.service.TodoService;
 import com.todo.api.exception.TodoExistException;
 import com.todo.api.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +20,11 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public List<Todo> getTodos() throws NoSuchElementException {
-        return todoRepository.findAll();
+        return todoRepository.findAll(sortByCreatedAsc());
+    }
+
+    private Sort sortByCreatedAsc() {
+        return Sort.by(Sort.Direction.DESC, "created");
     }
 
     @Override

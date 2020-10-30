@@ -7,14 +7,14 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class TodoModifyDto {
-    private long id;            // Id
+    private long todoId;            // Id
     private String title;       // 제목
     private String description; // 설명글
     private String category;    // 카테고리
     private String endTime;     // 마감일자
 
     public TodoModifyDto(Todo todo){
-        this.id = todo.getId();
+        this.todoId = todo.getId();
         this.title = todo.getTitle();
         this.description = todo.getDescription();
         this.category = todo.getCategory();
@@ -23,7 +23,7 @@ public class TodoModifyDto {
 
     public Todo toEntity(Todo todo) {
         return Todo.builder()
-                .id(this.id)
+                .id(this.todoId)
                 .imgUrl(todo.getImgUrl())
                 .title(this.title)
                 .category(this.category)
