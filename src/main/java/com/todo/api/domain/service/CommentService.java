@@ -12,8 +12,14 @@ public interface CommentService {
     public List<Comment> getComments(Todo todo) throws NoSuchElementException;
     public Comment getComment(Long commentId) throws NoSuchElementException;
     public void addComment(Comment comment) throws CommentExistException;
-    public void addSubComment(SubComment subComment) throws NoSuchElementException;
     public Comment modifyComment(Comment comment) throws NoSuchElementException;
     public void deleteComment(Long commentId) throws NoSuchElementException;
+
+
+    public SubComment getSubComment(Long subCommentId) throws NoSuchElementException;
+    public void addSubComment(SubComment subComment) throws NoSuchElementException;
+    public SubComment modifySubComment(SubComment subComment) throws NoSuchElementException;
+    public void deleteSubComment(Long subCommentId) throws NoSuchElementException;
+
     public boolean isExist(Long commentId);
 }

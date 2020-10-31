@@ -11,11 +11,6 @@ public class CommentAddDto {
     private String text;        // 제목
     private String writer;      // 작성자ID
 
-    public CommentAddDto(Comment comment){
-        this.text = comment.getText();
-        this.writer = comment.getWriter();
-    }
-
     public Comment toEntity(Todo todo) {
         return Comment.builder()
                 .text(this.text)

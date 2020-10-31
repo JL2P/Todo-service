@@ -47,9 +47,9 @@ public class TodoController {
     @PutMapping
     public TodoModifyDto modifyTodo(@RequestBody TodoModifyDto todoModifyDto){
         Todo todo = todoModifyDto.toEntity(todoService.getTodo(todoModifyDto.getTodoId()));
-        System.out.println(todo.toString());
+        System.out.println(todoModifyDto.toString());
 
-        todoService.modifyTodo(todoModifyDto.toEntity(todoService.getTodo(todoModifyDto.getTodoId())));
+        todoService.modifyTodo(todoModifyDto.toEntity(todo));
         return todoModifyDto;
     }
 
