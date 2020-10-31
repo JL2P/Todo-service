@@ -3,7 +3,9 @@ package com.todo.api.web.dto;
 import com.todo.api.domain.Todo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+@ToString
 @Getter
 @NoArgsConstructor
 public class TodoModifyDto {

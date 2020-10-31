@@ -1,39 +1,34 @@
 package com.todo.api.web.dto;
 
 import com.todo.api.domain.Comment;
+import com.todo.api.domain.SubComment;
 import com.todo.api.domain.Todo;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor
 public class CommentDto {
+
     private Long commentId;
-    private long todoId;
-    private String upper;       // 상위 댓글
-    private String level;
+    private Long todoId;
     private String text;        // 내용
     private String writer;      // 작성자ID
     private String likePoint;   // 좋아요
+    private List<SubCommentDto> subComments = new ArrayList<SubCommentDto>();
 
     public CommentDto(Comment comment){
         this.commentId = comment.getId();
         this.text = comment.getText();
         this.writer = comment.getWriter();
         this.likePoint = comment.getLikePoint();
-        this.upper = comment.getUpper();
-        this.level = comment.getLevel();
         this.todoId = comment.getTodo().getId();
-    }
-
-    public Comment toEntity(Todo todo) {
-        return Comment.builder()
-                .id(this.commentId)
-                .text(this.text)
-                .writer(this.writer)
-                .likePoint(this.likePoint)
-                .upper(this.upper)
-                .todo(todo)
-                .build();
+        this.subComments = comment.getSubComments().stream().map(subComment-> new SubCommentDto(subComment)).collect(Collectors.toList());
     }
 }
