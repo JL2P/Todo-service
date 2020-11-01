@@ -59,7 +59,7 @@ public class CommentController {
 
     @ApiOperation(value="대댓글 작성", notes="Todo의 댓글에 대댓글을 작성한다. ")
     @PostMapping("/{todoId}/comments/{commentId}/subComments")
-    public SubCommentAddDto addCommentToSubComment(@PathVariable Long todoId,Long commentId, @RequestBody SubCommentAddDto subCommentAddDto){
+    public SubCommentAddDto addCommentToSubComment(@PathVariable Long todoId,@PathVariable Long commentId, @RequestBody SubCommentAddDto subCommentAddDto){
         Comment comment = commentService.getComment(commentId);
         commentService.addSubComment(subCommentAddDto.toDomain(comment));
         return subCommentAddDto;
