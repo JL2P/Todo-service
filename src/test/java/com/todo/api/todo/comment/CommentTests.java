@@ -63,9 +63,6 @@ public class CommentTests {
     public void 계층형_데이터를_불러온다_test(){
         List<Comment> comments = commentRepository.findAllComments(1l);
         System.out.println(comments);
-
-
-        comments.stream().forEach(comment -> System.out.println(comment.getLevel()));
     }
 
 }
