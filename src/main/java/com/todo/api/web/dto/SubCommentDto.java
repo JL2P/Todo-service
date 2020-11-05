@@ -15,7 +15,7 @@ public class SubCommentDto {
     private String writer;      // 작성자ID
     private String likePoint;   // 좋아요
 
-    public SubCommentDto(SubComment subComment){
+    public SubCommentDto(SubComment subComment) {
         this.commentId = subComment.getComment().getId();
         this.subCommentId = subComment.getId();
         this.text = subComment.getText();

@@ -13,7 +13,7 @@ public class SubCommentAddDto {
     private String text;        // 내용
     private String writer;      // 작성자ID
 
-    public SubComment toDomain(Comment comment){
+    public SubComment toDomain(Comment comment) {
         SubComment subComment = SubComment.builder()
                 .comment(comment)
                 .targetId(this.targetId)

@@ -28,7 +28,7 @@ public class CommentTests {
     private CommentRepository commentRepository;
 
     @Before
-    public void setUp(){
+    public void setUp() {
 //        String accountId = "shoon2430";
 //
 //        Todo newTodo = Todo.builder()
@@ -45,7 +45,7 @@ public class CommentTests {
 
 
     @Test
-    public void 댓글을_등록한다_test(){
+    public void 댓글을_등록한다_test() {
         List<Todo> todos = todoRepository.findAll();
         Todo todo = todos.get(0);
 
@@ -54,13 +54,13 @@ public class CommentTests {
                 .build();
 
         //when
-       Comment newComment = commentRepository.save(comment);
+        Comment newComment = commentRepository.save(comment);
 
         //then
     }
 
     @Test
-    public void 계층형_데이터를_불러온다_test(){
+    public void 계층형_데이터를_불러온다_test() {
         List<Comment> comments = commentRepository.findAllComments(1l);
         System.out.println(comments);
     }

@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class TodoAddDto  {
+public class TodoAddDto {
     private String title;       // 제목
     private String imgUrl;      // 이미지 URL
     private String description; // 설명글
@@ -15,7 +15,7 @@ public class TodoAddDto  {
     private String endTime;     // 마감일자
     private String groupAt;     // 그룹계획여부
 
-    public TodoAddDto(Todo todo){
+    public TodoAddDto(Todo todo) {
         this.title = todo.getTitle();
         this.imgUrl = todo.getImgUrl();
         this.description = todo.getDescription();

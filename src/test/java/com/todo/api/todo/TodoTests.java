@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -31,7 +32,7 @@ public class TodoTests {
 
         //then
         Todo todo = todos.get(0);
-        System.out.println(">>>>> createDate = "+todo.getCreated() + ", modifiedDate = "+todo.getModified());
+        System.out.println(">>>>> createDate = " + todo.getCreated() + ", modifiedDate = " + todo.getModified());
 
         assertThat(todo.getCreated()).isAfter(now);
         assertThat(todo.getModified()).isAfter(now);
