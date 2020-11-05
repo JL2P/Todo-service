@@ -15,7 +15,7 @@ public class TodoModifyDto {
     private String category;    // 카테고리
     private String endTime;     // 마감일자
 
-    public TodoModifyDto(Todo todo){
+    public TodoModifyDto(Todo todo) {
         this.todoId = todo.getId();
         this.title = todo.getTitle();
         this.description = todo.getDescription();

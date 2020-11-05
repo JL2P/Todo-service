@@ -16,7 +16,7 @@ public class CommentModifyDto {
     private Long commentId;
     private String text;        // 내용
 
-    public Comment toEntity(Comment comment){
+    public Comment toEntity(Comment comment) {
         return Comment.builder()
                 .id(this.commentId)
                 .text(this.text)

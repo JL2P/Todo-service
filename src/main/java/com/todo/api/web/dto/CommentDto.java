@@ -23,12 +23,12 @@ public class CommentDto {
     private String likePoint;   // 좋아요
     private List<SubCommentDto> subComments = new ArrayList<SubCommentDto>();
 
-    public CommentDto(Comment comment){
+    public CommentDto(Comment comment) {
         this.commentId = comment.getId();
         this.text = comment.getText();
         this.writer = comment.getWriter();
         this.likePoint = comment.getLikePoint();
         this.todoId = comment.getTodo().getId();
-        this.subComments = comment.getSubComments().stream().map(subComment-> new SubCommentDto(subComment)).collect(Collectors.toList());
+        this.subComments = comment.getSubComments().stream().map(subComment -> new SubCommentDto(subComment)).collect(Collectors.toList());
     }
 }

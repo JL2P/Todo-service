@@ -30,9 +30,9 @@ public class TodoServiceImpl implements TodoService {
     @Override
     public Todo getTodo(Long todoId) throws NoSuchElementException {
         //데이터가 하나도 없을 경우 빈 group객체 반환
-        if(!isExist(todoId)) return new Todo();
+        if (!isExist(todoId)) return new Todo();
 
-        return todoRepository.findById(todoId).orElseThrow(()-> new NoSuchElementException());
+        return todoRepository.findById(todoId).orElseThrow(() -> new NoSuchElementException());
     }
 
     @Override
@@ -43,14 +43,14 @@ public class TodoServiceImpl implements TodoService {
     @Override
     public Todo modifyTodo(Todo todo) throws NoSuchElementException {
         //DB에 todo가 존재하는지 확인
-        if(!isExist(todo.getId()))throw new NoSuchElementException(todo.getId().toString());
+        if (!isExist(todo.getId())) throw new NoSuchElementException(todo.getId().toString());
 
         return todoRepository.save(todo);
     }
 
     @Override
     public void deleteTodo(Long todoId) throws NoSuchElementException {
-        if(!isExist(todoId))throw new NoSuchElementException(todoId.toString());
+        if (!isExist(todoId)) throw new NoSuchElementException(todoId.toString());
 
         todoRepository.deleteById(todoId);
     }
@@ -59,7 +59,7 @@ public class TodoServiceImpl implements TodoService {
     public boolean isExist(Long todoId) {
         Optional<Todo> todoOpt = todoRepository.findById(todoId);
         //Optional안에 todo객체가 존재하는 경우
-        if(todoOpt.isPresent()) return true;
+        if (todoOpt.isPresent()) return true;
 
         //Optional안에 todo객체가 존재하지 않는 경우
         return false;

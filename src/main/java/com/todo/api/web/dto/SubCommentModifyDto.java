@@ -12,7 +12,7 @@ public class SubCommentModifyDto {
     private Long subCommentId;
     private String text;        // 내용
 
-    public SubComment toEntity(SubComment subComment){
+    public SubComment toEntity(SubComment subComment) {
         return SubComment.builder()
                 .id(this.subCommentId)
                 .text(this.text)

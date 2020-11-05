@@ -1,7 +1,15 @@
 server:
   port: 9002
 
+# 유레카 서버 설정
+eureka:
+  client:
+  service-url:
+    defaultZone: http://localhost:8761/eureka/
+
 spring:
+  application:
+    name: todo-service
   devtools:
     livereload:
       enabled: true

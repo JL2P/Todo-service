@@ -29,9 +29,9 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Comment getComment(Long commentId) throws NoSuchElementException {
         //데이터가 하나도 없을 경우 빈 comment객체 반환
-        if(!isExist(commentId)) return new Comment();
+        if (!isExist(commentId)) return new Comment();
 
-        return commentRepository.findById(commentId).orElseThrow(()-> new NoSuchElementException());
+        return commentRepository.findById(commentId).orElseThrow(() -> new NoSuchElementException());
     }
 
     @Override
@@ -43,14 +43,14 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Comment modifyComment(Comment comment) throws NoSuchElementException {
         //DB에 comment가 존재하는지 확인
-        if(!isExist(comment.getId()))throw new NoSuchElementException(comment.getId().toString());
+        if (!isExist(comment.getId())) throw new NoSuchElementException(comment.getId().toString());
 
         return commentRepository.save(comment);
     }
 
     @Override
     public void deleteComment(Long commentId) throws NoSuchElementException {
-        if(!isExist(commentId))throw new NoSuchElementException(commentId.toString());
+        if (!isExist(commentId)) throw new NoSuchElementException(commentId.toString());
 
         commentRepository.deleteById(commentId);
     }
@@ -58,9 +58,9 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public SubComment getSubComment(Long subCommentId) throws NoSuchElementException {
         //데이터가 하나도 없을 경우 빈 comment객체 반환
-        if(!isExist(subCommentId)) return new SubComment();
+        if (!isExist(subCommentId)) return new SubComment();
 
-        return subCommentRepository.findById(subCommentId).orElseThrow(()-> new NoSuchElementException());
+        return subCommentRepository.findById(subCommentId).orElseThrow(() -> new NoSuchElementException());
     }
 
     @Override
@@ -71,14 +71,14 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public SubComment modifySubComment(SubComment subComment) throws NoSuchElementException {
         //DB에 comment가 존재하는지 확인
-        if(!isExist(subComment.getId()))throw new NoSuchElementException(subComment.getId().toString());
+        if (!isExist(subComment.getId())) throw new NoSuchElementException(subComment.getId().toString());
 
         return subCommentRepository.save(subComment);
     }
 
     @Override
     public void deleteSubComment(Long subCommentId) throws NoSuchElementException {
-        if(!isExist(subCommentId))throw new NoSuchElementException(subCommentId.toString());
+        if (!isExist(subCommentId)) throw new NoSuchElementException(subCommentId.toString());
 
         subCommentRepository.deleteById(subCommentId);
     }
@@ -88,7 +88,7 @@ public class CommentServiceImpl implements CommentService {
     public boolean isExist(Long commentId) {
         Optional<Comment> commentOpt = commentRepository.findById(commentId);
         //Optional안에 comment객체가 존재하는 경우
-        if(commentOpt.isPresent()) return true;
+        if (commentOpt.isPresent()) return true;
 
         //Optional안에 comment객체가 존재하지 않는 경우
         return false;

@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor
-public class TodoDto  {
+public class TodoDto {
     private long todoId;            // Id
     private String imgUrl;      // 이미지 URL
     private String title;       // 제목
@@ -21,7 +21,7 @@ public class TodoDto  {
     private int likePoint;      // 좋아요
     private List<CommentDto> comments;
 
-    public TodoDto(Todo todo){
+    public TodoDto(Todo todo) {
         this.todoId = todo.getId();
         this.imgUrl = todo.getImgUrl();
         this.title = todo.getTitle();

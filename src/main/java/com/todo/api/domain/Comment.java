@@ -32,6 +32,6 @@ public class Comment extends CommonDateEntity {
     private Todo todo;
 
     @Builder.Default
-    @OneToMany(mappedBy = "comment", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "comment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<SubComment> subComments = new ArrayList<SubComment>();
 }

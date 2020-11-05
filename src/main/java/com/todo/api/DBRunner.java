@@ -14,12 +14,12 @@ import java.sql.DatabaseMetaData;
 
 @Component
 @Order(1)
-public class DBRunner implements ApplicationRunner{
+public class DBRunner implements ApplicationRunner {
 
     private final DataSource dataSource;
 
-    DBRunner(DataSource dataSource){
-        this.dataSource =dataSource;
+    DBRunner(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     private Logger logger = LoggerFactory.getLogger(DBRunner.class);
@@ -29,9 +29,9 @@ public class DBRunner implements ApplicationRunner{
         Connection connection = dataSource.getConnection();
         DatabaseMetaData dbMeta = connection.getMetaData();
         logger.info("=========================================");
-        logger.info("DB URL : "+ dbMeta.getURL());
-        logger.info("DB Username : "+dbMeta.getUserName());
-        logger.info("DB DatabaseProductName : "+dbMeta.getDatabaseProductName());
+        logger.info("DB URL : " + dbMeta.getURL());
+        logger.info("DB Username : " + dbMeta.getUserName());
+        logger.info("DB DatabaseProductName : " + dbMeta.getDatabaseProductName());
 
         logger.info("=========================================");
     }
