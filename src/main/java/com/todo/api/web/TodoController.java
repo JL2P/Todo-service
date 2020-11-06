@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Api(tags = {"1. Todo"})
 @RequiredArgsConstructor
 @RestController
-//@RequestMapping("/api/todos") //컨트롤러 기본 URL
+@RequestMapping("/api/todos") //컨트롤러 기본 URL
 public class TodoController {
 
     private final TodoService todoService;
