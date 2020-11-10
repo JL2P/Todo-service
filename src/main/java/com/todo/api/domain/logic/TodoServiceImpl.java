@@ -23,6 +23,11 @@ public class TodoServiceImpl implements TodoService {
         return todoRepository.findAll(sortByCreatedAsc());
     }
 
+    @Override
+    public List<Todo> getMyTodos(List<String> writers) throws NoSuchElementException {
+        return todoRepository.findAllByWriterIn(writers, sortByCreatedAsc());
+    }
+
     private Sort sortByCreatedAsc() {
         return Sort.by(Sort.Direction.DESC, "created");
     }
