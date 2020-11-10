@@ -1,5 +1,6 @@
 package com.todo.api.web;
 
+import com.todo.api.config.JwtTokenProvider;
 import com.todo.api.domain.Todo;
 import com.todo.api.domain.service.TodoService;
 import com.todo.api.web.dto.TodoAddDto;
@@ -11,6 +12,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -22,13 +25,29 @@ import java.util.stream.Collectors;
 public class TodoController {
 
     private final TodoService todoService;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @ApiOperation(value = "TODO 리스트 조회", notes = "메인페이지에서 TODO리스트를 조회한다.")
-    @GetMapping
+    @GetMapping(value = "/all")
     public List<TodoDto> getTodoList() {
         List<Todo> todos = todoService.getTodos();
         return todos.stream().map(todo -> new TodoDto(todo)).collect(Collectors.toList());
     }
+
+    @ApiOperation(value = "나의 TODO 리스트 조회", notes = "내가 작성한 Todo와 내가 팔로우한 사람의 Todo를 조회한다.")
+    @GetMapping
+    public List<TodoDto> getMyTodoList(HttpServletRequest request){
+        //토큰 취득
+        String token = jwtTokenProvider.resolveToken(request);
+        //토큰을 Decode하여 AccountId정보 취득
+        String writer = jwtTokenProvider.getAccountId(token);
+        List<String> writers = new ArrayList<>();
+        writers.add(writer);
+
+        List<Todo> todos = todoService.getMyTodos(writers);
+        return todos.stream().map(todo->new TodoDto(todo)).collect(Collectors.toList());
+    }
+
 
     @ApiOperation(value = "TODO 상세 정보 조회", notes = "메인페이지에서 모달창을 열었을 때 TODO정보를 조회한다.")
     @GetMapping("/{todoId}")
