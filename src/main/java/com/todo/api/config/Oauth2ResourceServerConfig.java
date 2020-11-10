@@ -21,14 +21,14 @@ public class Oauth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeRequests().anyRequest().authenticated()
-//                .and()
-//                .requestMatchers().antMatchers("/api/**");
         http.headers().frameOptions().disable();
         http.authorizeRequests()
                 .antMatchers("/api/**").access("#oauth2.hasScope('read')")
                 .anyRequest().authenticated();
+
+        //인증 필요없음 (테스트시에만 사용)
+//        http.authorizeRequests()
+//                .antMatchers("/").permitAll();
     }
 
     @Bean

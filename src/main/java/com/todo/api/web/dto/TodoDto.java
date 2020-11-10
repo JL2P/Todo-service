@@ -19,9 +19,10 @@ public class TodoDto {
     private String endTime;     // 마감일자
     private String groupAt;     // 그룹계획여부
     private int likePoint;      // 좋아요
+    private boolean likeState;
     private List<CommentDto> comments;
 
-    public TodoDto(Todo todo) {
+    public TodoDto(Todo todo, boolean likeState) {
         this.todoId = todo.getId();
         this.imgUrl = todo.getImgUrl();
         this.title = todo.getTitle();
@@ -30,7 +31,8 @@ public class TodoDto {
         this.writer = todo.getWriter();
         this.endTime = todo.getEndTime();
         this.groupAt = todo.getGroupAt();
-        this.likePoint = todo.getLikePoint();
+        this.likePoint = todo.getLikes().size();
+        this.likeState = likeState;
         this.comments = todo.getComments().stream().map(comment -> new CommentDto(comment)).collect(Collectors.toList());
     }
 

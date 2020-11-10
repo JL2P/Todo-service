@@ -33,7 +33,6 @@ public class TodoModifyDto {
                 .description(this.description)
                 .groupAt(todo.getGroupAt())
                 .writer(todo.getWriter())
-                .likePoint(todo.getLikePoint())
                 .build();
     }
 }
