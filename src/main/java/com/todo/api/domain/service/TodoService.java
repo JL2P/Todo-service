@@ -12,6 +12,8 @@ public interface TodoService {
     //내가 작성한 Todo와 팔로우한 사람의 Todo를 조회한다.
     public List<Todo> getMyTodos(List<String> writers) throws NoSuchElementException;
 
+    public List<Todo> getSelectTodos(String writer) throws NoSuchElementException;
+
     public Todo getTodo(Long todoId) throws NoSuchElementException;
 
     public void addTodo(Todo todo) throws TodoExistException;

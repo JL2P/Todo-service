@@ -8,7 +8,17 @@ import java.util.List;
 
 public interface TodoRepository extends JpaRepository<Todo, Long> {
 
+    /*
+     * SELECT * FROM TODOS
+     *   WHERE 1=1
+     *   AND writer = writer1
+     * */
     List<Todo> findByWriter(String writer, Sort sort);
 
+    /*
+    * SELECT * FROM TODOS
+    *   WHERE 1=1
+    *   AND writer In (writer1,writer2,writer3)
+    * */
     List<Todo> findAllByWriterIn(List<String> writer ,Sort sort);
 }

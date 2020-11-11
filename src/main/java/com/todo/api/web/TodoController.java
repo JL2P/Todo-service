@@ -53,6 +53,19 @@ public class TodoController {
         return todos.stream().map(todo->new TodoDto(todo,likeService.checkLiked(todo, accountId))).collect(Collectors.toList());
     }
 
+    @GetMapping("/login")
+    public List<TodoDto> getLoginTodos(HttpServletRequest request){
+        String token = jwtTokenProvider.resolveToken(request);
+        String accountId = jwtTokenProvider.getAccountId(token);
+        List<Todo> todos = todoService.getSelectTodos(accountId);
+        return todos.stream().map(todo->new TodoDto(todo,likeService.checkLiked(todo, accountId))).collect(Collectors.toList());
+    }
+
+    @GetMapping("/account/{selectId}")
+    public List<TodoDto> getSelectTodos(@PathVariable String selectId){
+        List<Todo> todos = todoService.getSelectTodos(selectId);
+        return todos.stream().map(todo->new TodoDto(todo,likeService.checkLiked(todo, selectId))).collect(Collectors.toList());
+    }
 
     @ApiOperation(value = "TODO 상세 정보 조회", notes = "메인페이지에서 모달창을 열었을 때 TODO정보를 조회한다.")
     @GetMapping("/{todoId}")
