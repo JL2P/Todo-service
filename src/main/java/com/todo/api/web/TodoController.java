@@ -92,6 +92,16 @@ public class TodoController {
     }
 
 
+    @ApiOperation(value = "TODO 완료", notes = "TODO를 완료한다.")
+    @PostMapping("/{todoId}/complete")
+    public String completeTodo(@PathVariable Long todoId) {
+        Todo todo = todoService.getTodo(todoId);
+        todo.comleted();
+        todoService.modifyTodo(todo);
+        return "todo complete success";
+    }
+
+
     @ExceptionHandler(RuntimeException.class)
     public @ResponseBody
     ErrorMessage runTimeError(RuntimeException e) throws NoSuchElementException {

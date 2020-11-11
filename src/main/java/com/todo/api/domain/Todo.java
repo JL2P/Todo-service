@@ -1,6 +1,7 @@
 package com.todo.api.domain;
 
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -26,6 +27,9 @@ public class Todo extends CommonDateEntity {
     private String endTime;     // 마감일자
     private String groupAt;     // 그룹계획여부
 
+    @Column(columnDefinition = "varchar(255) default 'N'")
+    private String completed;    // 완료여부 (Y완료 N미완료)
+
     @Builder.Default
     @OneToMany(mappedBy = "todo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<Comment>();
@@ -33,5 +37,10 @@ public class Todo extends CommonDateEntity {
     @Builder.Default
     @OneToMany(mappedBy = "todo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Like> likes = new ArrayList<Like>(); //좋아요
+
+
+    public void comleted(){
+        this.completed="Y";
+    }
 
 }
