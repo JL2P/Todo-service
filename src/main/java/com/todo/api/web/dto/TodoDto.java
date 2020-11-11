@@ -24,6 +24,7 @@ public class TodoDto {
     private String completed;   // 계획 완료 여부 (완료:Y 미완료:N)
     private List<CommentDto> comments;
     private LocalDateTime created;
+    private LocalDateTime modified;
 
     public TodoDto(Todo todo, boolean likeState) {
         this.todoId = todo.getId();
@@ -39,6 +40,7 @@ public class TodoDto {
         this.completed = todo.getCompleted();
         this.comments = todo.getComments().stream().map(comment -> new CommentDto(comment)).collect(Collectors.toList());
         this.created = todo.getCreated();
+        this.modified = todo.getModified();
     }
 
 //    public Todo toEntity() {
