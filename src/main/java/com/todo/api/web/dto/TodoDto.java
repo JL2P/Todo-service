@@ -18,8 +18,9 @@ public class TodoDto {
     private String writer;      // 작성자ID
     private String endTime;     // 마감일자
     private String groupAt;     // 그룹계획여부
-    private int likePoint;      // 좋아요
-    private boolean likeState;
+    private int likePoint;      // 좋아요 갯수
+    private boolean likeState;  // 좋아요 했는지 체크
+    private String completed;   // 계획 완료 여부 (완료:Y 미완료:N)
     private List<CommentDto> comments;
 
     public TodoDto(Todo todo, boolean likeState) {
@@ -33,6 +34,7 @@ public class TodoDto {
         this.groupAt = todo.getGroupAt();
         this.likePoint = todo.getLikes().size();
         this.likeState = likeState;
+        this.completed = todo.getCompleted();
         this.comments = todo.getComments().stream().map(comment -> new CommentDto(comment)).collect(Collectors.toList());
     }
 

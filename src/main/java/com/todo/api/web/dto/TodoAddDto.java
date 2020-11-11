@@ -34,6 +34,7 @@ public class TodoAddDto {
                 .writer(this.writer)
                 .endTime(this.endTime)
                 .groupAt(this.groupAt)
+                .completed("N")
                 .build();
     }
 }
