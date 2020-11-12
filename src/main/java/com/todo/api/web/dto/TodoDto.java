@@ -3,6 +3,7 @@ package com.todo.api.web.dto;
 import com.todo.api.domain.Todo;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +23,8 @@ public class TodoDto {
     private boolean likeState;  // 좋아요 했는지 체크
     private String completed;   // 계획 완료 여부 (완료:Y 미완료:N)
     private List<CommentDto> comments;
+    private LocalDateTime created;
+    private LocalDateTime modified;
 
     public TodoDto(Todo todo, boolean likeState) {
         this.todoId = todo.getId();
@@ -36,6 +39,8 @@ public class TodoDto {
         this.likeState = likeState;
         this.completed = todo.getCompleted();
         this.comments = todo.getComments().stream().map(comment -> new CommentDto(comment)).collect(Collectors.toList());
+        this.created = todo.getCreated();
+        this.modified = todo.getModified();
     }
 
 //    public Todo toEntity() {
