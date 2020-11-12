@@ -28,3 +28,4 @@ spring:
     database-platform: org.hibernate.dialect.MariaDB53Dialect
     hibernate:
       ddl-auto: update
+#    showSql: true

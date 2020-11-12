@@ -35,8 +35,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void addComment(Comment comment) throws CommentExistException {
-        commentRepository.save(comment);
+    public Comment addComment(Comment comment) throws CommentExistException {
+        return commentRepository.save(comment);
     }
 
 
@@ -64,8 +64,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void addSubComment(SubComment subComment) throws NoSuchElementException {
-        subCommentRepository.save(subComment);
+    public SubComment addSubComment(SubComment subComment) throws NoSuchElementException {
+       return subCommentRepository.save(subComment);
     }
 
     @Override
