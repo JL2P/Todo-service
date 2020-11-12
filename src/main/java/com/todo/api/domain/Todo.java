@@ -43,4 +43,8 @@ public class Todo extends CommonDateEntity {
         this.completed="Y";
     }
 
+    public void incompleted(){
+        this.completed="N";
+    }
+
 }

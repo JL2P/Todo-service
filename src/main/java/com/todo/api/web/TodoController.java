@@ -53,6 +53,7 @@ public class TodoController {
         return todos.stream().map(todo->new TodoDto(todo,likeService.checkLiked(todo, accountId))).collect(Collectors.toList());
     }
 
+    @ApiOperation(value = "로그인된 account의 todoList 조회", notes = "로그인된 account의 todoList 조회")
     @GetMapping("/login")
     public List<TodoDto> getLoginTodos(HttpServletRequest request){
         String token = jwtTokenProvider.resolveToken(request);
@@ -61,6 +62,7 @@ public class TodoController {
         return todos.stream().map(todo->new TodoDto(todo,likeService.checkLiked(todo, accountId))).collect(Collectors.toList());
     }
 
+    @ApiOperation(value = "선택된 account의 todoList 조회", notes = "선택된 account의 todoList 조회")
     @GetMapping("/account/{selectId}")
     public List<TodoDto> getSelectTodos(@PathVariable String selectId){
         List<Todo> todos = todoService.getSelectTodos(selectId);
@@ -113,6 +115,16 @@ public class TodoController {
         todoService.modifyTodo(todo);
         return "todo complete success";
     }
+
+    @ApiOperation(value = "TODO 미완료", notes = "TODO를 완료를 해지한다.")
+    @PostMapping("/{todoId}/incomplete")
+    public String incompleteTodo(@PathVariable Long todoId) {
+        Todo todo = todoService.getTodo(todoId);
+        todo.incompleted();
+        todoService.modifyTodo(todo);
+        return "todo incomplete success";
+    }
+
 
 
     @ExceptionHandler(RuntimeException.class)
