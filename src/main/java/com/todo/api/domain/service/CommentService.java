@@ -28,5 +28,4 @@ public interface CommentService {
 
     public void deleteSubComment(Long subCommentId) throws NoSuchElementException;
 
-    public boolean isExist(Long commentId);
 }
