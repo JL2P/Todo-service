@@ -33,11 +33,11 @@ public class CommentController {
 
     @ApiOperation(value = "댓글 작성", notes = "해당 Todo에 댓글을 작성한다.")
     @PostMapping("/{todoId}/comments")
-    public CommentAddDto addComment(@PathVariable Long todoId, @RequestBody CommentAddDto commentAddDto) {
+    public CommentDto addComment(@PathVariable Long todoId, @RequestBody CommentAddDto commentAddDto) {
         Todo todo = todoService.getTodo(todoId);
         Comment comment = commentAddDto.toEntity(todo);
-        commentService.addComment(comment);
-        return commentAddDto;
+        Comment newComment = commentService.addComment(comment);
+        return new CommentDto(newComment);
     }
 
 
@@ -59,10 +59,10 @@ public class CommentController {
 
     @ApiOperation(value = "대댓글 작성", notes = "Todo의 댓글에 대댓글을 작성한다. ")
     @PostMapping("/{todoId}/comments/{commentId}/subComments")
-    public SubCommentAddDto addCommentToSubComment(@PathVariable Long todoId, @PathVariable Long commentId, @RequestBody SubCommentAddDto subCommentAddDto) {
+    public SubCommentDto addCommentToSubComment(@PathVariable Long todoId, @PathVariable Long commentId, @RequestBody SubCommentAddDto subCommentAddDto) {
         Comment comment = commentService.getComment(commentId);
-        commentService.addSubComment(subCommentAddDto.toDomain(comment));
-        return subCommentAddDto;
+        SubComment newSubComment = commentService.addSubComment(subCommentAddDto.toDomain(comment));
+        return new SubCommentDto(newSubComment);
     }
 
 

@@ -25,6 +25,7 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public List<Todo> getMyTodos(List<String> writers) throws NoSuchElementException {
+        System.out.println(writers.size());
         return todoRepository.findAllByWriterIn(writers, sortByCreatedAsc());
     }
 
@@ -47,8 +48,8 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public void addTodo(Todo todo) throws TodoExistException {
-        todoRepository.save(todo);
+    public Todo addTodo(Todo todo) throws TodoExistException {
+        return todoRepository.save(todo);
     }
 
     @Override

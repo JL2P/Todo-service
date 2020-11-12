@@ -16,7 +16,7 @@ public interface TodoService {
 
     public Todo getTodo(Long todoId) throws NoSuchElementException;
 
-    public void addTodo(Todo todo) throws TodoExistException;
+    public Todo addTodo(Todo todo) throws TodoExistException;
 
     public Todo modifyTodo(Todo todo) throws NoSuchElementException;
 

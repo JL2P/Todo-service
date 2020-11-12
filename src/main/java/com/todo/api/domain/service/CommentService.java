@@ -13,7 +13,7 @@ public interface CommentService {
 
     public Comment getComment(Long commentId) throws NoSuchElementException;
 
-    public void addComment(Comment comment) throws CommentExistException;
+    public Comment addComment(Comment comment) throws CommentExistException;
 
     public Comment modifyComment(Comment comment) throws NoSuchElementException;
 
@@ -22,11 +22,10 @@ public interface CommentService {
 
     public SubComment getSubComment(Long subCommentId) throws NoSuchElementException;
 
-    public void addSubComment(SubComment subComment) throws NoSuchElementException;
+    public SubComment addSubComment(SubComment subComment) throws NoSuchElementException;
 
     public SubComment modifySubComment(SubComment subComment) throws NoSuchElementException;
 
     public void deleteSubComment(Long subCommentId) throws NoSuchElementException;
 
-    public boolean isExist(Long commentId);
 }

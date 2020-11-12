@@ -40,16 +40,15 @@ public class TodoController {
     }
 
     @ApiOperation(value = "나의 TODO 리스트 조회", notes = "내가 작성한 Todo와 내가 팔로우한 사람의 Todo를 조회한다.")
-    @GetMapping
-    public List<TodoDto> getMyTodoList(HttpServletRequest request){
+    @PostMapping("/my")
+    public List<TodoDto> getMyTodoList(HttpServletRequest request, @RequestBody ArrayList<String> followers ){
         //토큰 취득
         String token = jwtTokenProvider.resolveToken(request);
         //토큰을 Decode하여 AccountId정보 취득
         String accountId = jwtTokenProvider.getAccountId(token);
-        List<String> writers = new ArrayList<>();
-        writers.add(accountId);
+        followers.add(accountId);
 
-        List<Todo> todos = todoService.getMyTodos(writers);
+        List<Todo> todos = todoService.getMyTodos(followers);
         return todos.stream().map(todo->new TodoDto(todo,likeService.checkLiked(todo, accountId))).collect(Collectors.toList());
     }
 
@@ -83,9 +82,9 @@ public class TodoController {
 
     @ApiOperation(value = "TODO 생성", notes = "메인페이지에서 TODO를 생성한다.")
     @PostMapping
-    public TodoAddDto addTodo(@RequestBody TodoAddDto todoAddDto) {
-        todoService.addTodo(todoAddDto.toEntity());
-        return todoAddDto;
+    public TodoDto addTodo(@RequestBody TodoAddDto todoAddDto) {
+        Todo todo = todoService.addTodo(todoAddDto.toEntity());
+        return new TodoDto(todo,false);
     }
 
     @ApiOperation(value = "TODO 수정", notes = "메인페이지에서 TODO를 수정한다.")
