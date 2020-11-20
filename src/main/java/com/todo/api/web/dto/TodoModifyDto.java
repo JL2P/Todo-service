@@ -14,6 +14,7 @@ public class TodoModifyDto {
     private String description; // 설명글
     private String category;    // 카테고리
     private String endTime;     // 마감일자
+    private String startTime;
 
     public TodoModifyDto(Todo todo) {
         this.todoId = todo.getId();
@@ -21,6 +22,7 @@ public class TodoModifyDto {
         this.description = todo.getDescription();
         this.category = todo.getCategory();
         this.endTime = todo.getEndTime();
+        this.startTime = todo.getStartTime();
     }
 
     public Todo toEntity(Todo todo) {
@@ -30,6 +32,7 @@ public class TodoModifyDto {
                 .title(this.title)
                 .category(this.category)
                 .endTime(this.endTime)
+                .startTime(this.startTime)
                 .description(this.description)
                 .groupAt(todo.getGroupAt())
                 .writer(todo.getWriter())
