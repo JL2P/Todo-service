@@ -17,6 +17,7 @@ public class TodoDto {
     private String description; // 설명글
     private String category;    // 카테고리
     private String writer;      // 작성자ID
+    private String startTime;    // 시작일자
     private String endTime;     // 마감일자
     private String groupAt;     // 그룹계획여부
     private int likePoint;      // 좋아요 갯수
@@ -34,6 +35,7 @@ public class TodoDto {
         this.category = todo.getCategory();
         this.writer = todo.getWriter();
         this.endTime = todo.getEndTime();
+        this.startTime = todo.getStartTime();
         this.groupAt = todo.getGroupAt();
         this.likePoint = todo.getLikes().size();
         this.likeState = likeState;

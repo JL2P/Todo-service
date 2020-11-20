@@ -13,6 +13,7 @@ public class TodoAddDto {
     private String category;    // 카테고리
     private String writer;      // 작성자ID
     private String endTime;     // 마감일자
+    private String startTime;   // 시작일자
     private String groupAt;     // 그룹계획여부
 
     public TodoAddDto(Todo todo) {
@@ -22,6 +23,7 @@ public class TodoAddDto {
         this.category = todo.getCategory();
         this.writer = todo.getWriter();
         this.endTime = todo.getEndTime();
+        this.startTime = todo.getStartTime();
         this.groupAt = todo.getGroupAt();
     }
 
@@ -33,6 +35,7 @@ public class TodoAddDto {
                 .category(this.category)
                 .writer(this.writer)
                 .endTime(this.endTime)
+                .startTime(this.startTime)
                 .groupAt(this.groupAt)
                 .completed("N")
                 .build();

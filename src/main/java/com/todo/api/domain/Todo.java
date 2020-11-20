@@ -25,6 +25,7 @@ public class Todo extends CommonDateEntity {
     private String category;    // 카테고리
     private String writer;      // 작성자ID
     private String endTime;     // 마감일자
+    private String startTime;   // 시작일자
     private String groupAt;     // 그룹계획여부
 
     @Column(columnDefinition = "varchar(255) default 'N'")
