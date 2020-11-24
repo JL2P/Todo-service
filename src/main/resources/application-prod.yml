@@ -1,0 +1,12 @@
+spring:
+  profiles: prod
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mysql://todo-db-server-service.default.svc.cluster.local:3306/planit_todo?useUnicode=true&charaterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: planit
+    password: planit1234
+  jpa:
+    database-platform: org.hibernate.dialect.MariaDB53Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update

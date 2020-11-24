@@ -36,6 +36,7 @@ public class TodoModifyDto {
                 .description(this.description)
                 .groupAt(todo.getGroupAt())
                 .writer(todo.getWriter())
+                .completed(todo.getCompleted())
                 .build();
     }
 }
