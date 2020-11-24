@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-db-server-service
+  labels:
+    app: mariadb
+    tier: database
+spec:
+  ports:
+    - port: 8005
+      targetPort: 3306
+      name: db-port
+  selector: # mysql Pod Should contain same labels
+    app: todo-db
+    tier: database
+  clusterIP: None # We Use DNS, Thus ClusterIP is not relevant
