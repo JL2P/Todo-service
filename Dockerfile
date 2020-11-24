@@ -1,4 +1,6 @@
-FROM adoptopenjdk/openjdk11
-COPY --from=builder /workspace/build/libs/*.jar app.jar
+FROM adoptopenjdk/openjdk11:alpine-jre
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
+
 EXPOSE 9002
-ENTRYPOINT ["java", "-jar","-Dspring.profiles.active=prod", "app.jar"]
+ENTRYPOINT ["java","-jar","-Dspring.profiles.active=prod","/app.jar"]
