@@ -29,7 +29,10 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public List<Todo> getMyTodos(List<String> writers) throws NoSuchElementException {
-        return todoRepository.findAllByWriterIn(writers, sortByCreatedAsc());
+        //시작날짜 빠른순
+        //마감일자 빠른순
+        //생성일자 최신
+        return todoRepository.findAllByWriterInOrderByStartTimeAscEndTimeAscCreatedDesc(writers);
     }
 
     @Override

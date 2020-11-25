@@ -88,7 +88,7 @@ public class TodoController {
         Todo todo = todoService.addTodo(todoAddDto.toEntity());
         return new TodoDto(todo,false);
     }
-    
+
     @ApiOperation(value = "기간별 Todo 생성", notes = "메인페이지에서 Todo의 기간을 설정하고 설정한 기간만큼 Todo를 생성한다.")
     @PostMapping("/day")
     public List<TodoDto> addDayTodo(@RequestBody TodoAddDto todoAddDto) {

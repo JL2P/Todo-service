@@ -20,5 +20,5 @@ public interface TodoRepository extends JpaRepository<Todo, Long> {
     *   WHERE 1=1
     *   AND writer In (writer1,writer2,writer3)
     * */
-    List<Todo> findAllByWriterIn(List<String> writer ,Sort sort);
+    List<Todo> findAllByWriterInOrderByStartTimeAscEndTimeAscCreatedDesc(List<String> writer);
 }
