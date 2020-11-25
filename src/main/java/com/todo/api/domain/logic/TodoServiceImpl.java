@@ -25,7 +25,6 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public List<Todo> getMyTodos(List<String> writers) throws NoSuchElementException {
-        System.out.println(writers.size());
         return todoRepository.findAllByWriterIn(writers, sortByCreatedAsc());
     }
 
