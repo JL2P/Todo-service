@@ -1,12 +1,11 @@
-# 개발 환경
-
+# docker-compose로 테스트시 사용되는 yml파일
 spring:
   devtools:
     livereload:
       enabled: true
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/PLANIT_TODO?useUnicode=true&charaterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    url: jdbc:mariadb://docker-mariaDB/planit_todo?useUnicode=true&charaterEncoding=utf-8&useSSL=false&serverTimezone=UTC
     hikari:
       username: planit
       password: planit1234

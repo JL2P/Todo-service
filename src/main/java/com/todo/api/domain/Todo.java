@@ -39,6 +39,10 @@ public class Todo extends CommonDateEntity {
     @OneToMany(mappedBy = "todo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Like> likes = new ArrayList<Like>(); //좋아요
 
+    //groupGallery
+    @Builder.Default
+    @OneToMany(mappedBy = "todo", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private List<Gallery> galleries = new ArrayList<Gallery>();
 
     public void comleted(){
         this.completed="Y";
