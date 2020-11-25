@@ -8,6 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -25,7 +29,10 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public List<Todo> getMyTodos(List<String> writers) throws NoSuchElementException {
-        return todoRepository.findAllByWriterIn(writers, sortByCreatedAsc());
+        //시작날짜 빠른순
+        //마감일자 빠른순
+        //생성일자 최신
+        return todoRepository.findAllByWriterInOrderByStartTimeAscEndTimeAscCreatedDesc(writers);
     }
 
     @Override
@@ -49,6 +56,43 @@ public class TodoServiceImpl implements TodoService {
     @Override
     public Todo addTodo(Todo todo) throws TodoExistException {
         return todoRepository.save(todo);
+    }
+
+    @Override
+    public List<Todo> addTodos(List<Todo> todos) {
+        return todoRepository.saveAll(todos);
+    }
+
+    //요일별 코드를 구한다.
+    @Override
+    public int dayCodeToDayConverter(String dayCode){
+        int day = 1;
+        switch (dayCode){
+            case "DAY1": day=1; break;
+            case "DAY2": day=2; break;
+            case "DAY3": day=3; break;
+            case "DAY4": day=4; break;
+            case "DAY5": day=5; break;
+            default: day=1;
+        }
+        return day;
+    }
+
+    //요일별 코드를 구한다.
+    @Override
+    public String weekToCodeConverter(int week){
+        String code = "";
+        switch (week){
+            case 1: code="MON"; break;
+            case 2: code="TUE"; break;
+            case 3: code="WEN"; break;
+            case 4: code="THU"; break;
+            case 5: code="FRI"; break;
+            case 6: code="SAT"; break;
+            case 7: code="SUN"; break;
+            default: code="";
+        }
+        return code;
     }
 
     @Override
