@@ -52,4 +52,12 @@ public class Todo extends CommonDateEntity {
         this.completed="N";
     }
 
+    public void setStartTime(String startTime){
+        this.startTime=startTime;
+    }
+
+    public void setEndTime(String endTime){
+        this.endTime = endTime;
+    }
+
 }

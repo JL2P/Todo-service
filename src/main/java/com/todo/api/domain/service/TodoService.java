@@ -16,11 +16,20 @@ public interface TodoService {
 
     public Todo getTodo(Long todoId) throws NoSuchElementException;
 
+    //Todo 1개 저장
     public Todo addTodo(Todo todo) throws TodoExistException;
+
+    //Todo 여러개 저장
+    public List<Todo> addTodos(List<Todo> todos);
 
     public Todo modifyTodo(Todo todo) throws NoSuchElementException;
 
     public void deleteTodo(Long todoId) throws NoSuchElementException;
 
     public boolean isExist(Long todoId);
+
+    //기간별 코드를 구한다.
+    public int dayCodeToDayConverter(String dayCode);
+    //요일별 코드를 구한다.
+    public String weekToCodeConverter(int week);
 }

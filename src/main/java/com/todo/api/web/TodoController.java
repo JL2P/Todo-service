@@ -14,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -86,6 +88,65 @@ public class TodoController {
         Todo todo = todoService.addTodo(todoAddDto.toEntity());
         return new TodoDto(todo,false);
     }
+    
+    @ApiOperation(value = "기간별 Todo 생성", notes = "메인페이지에서 Todo의 기간을 설정하고 설정한 기간만큼 Todo를 생성한다.")
+    @PostMapping("/day")
+    public List<TodoDto> addDayTodo(@RequestBody TodoAddDto todoAddDto) {
+        String todoKind = todoAddDto.getTodoKind();
+        String todoSubKind = todoAddDto.getTodoSubKind();
+        List<Todo> addedTodos = new ArrayList<>();
+
+        if(todoKind.equals("DAY")) {
+            LocalDate start = LocalDate.parse(todoAddDto.getStartTime(), DateTimeFormatter.ISO_DATE);
+            LocalDate end = LocalDate.parse(todoAddDto.getEndTime(), DateTimeFormatter.ISO_DATE);
+            //기간내 Todo를 생성한다.
+            while (start.isBefore(end)) {
+                int day = todoService.dayCodeToDayConverter(todoSubKind);
+                Todo newTodo = todoAddDto.toEntity();
+                // 시작일자와 마감일자를 설정
+                newTodo.setStartTime(start.toString());
+                newTodo.setEndTime(start.toString());
+
+                addedTodos.add(newTodo);
+                //다음 기간설정
+                start = start.plusDays(day);
+            }
+        }
+
+        return todoService.addTodos(addedTodos).stream().map(addedTodo -> new TodoDto(addedTodo,false)).collect(Collectors.toList());
+    }
+
+    @ApiOperation(value = "요일별 Todo 생성", notes = "메인페이지에서 Todo의 요일을 설정하고 설정한 기간만큼 Todo를 생성한다.")
+    @PostMapping("/week")
+    public List<TodoDto> addWeekTodo(@RequestBody TodoAddDto todoAddDto) {
+        String todoKind = todoAddDto.getTodoKind();
+        String todoSubKind = todoAddDto.getTodoSubKind();
+        List<Todo> addedTodos = new ArrayList<>();
+
+        if(todoKind.equals("WEEK")) {
+            LocalDate start = LocalDate.parse(todoAddDto.getStartTime(), DateTimeFormatter.ISO_DATE);
+            LocalDate end = LocalDate.parse(todoAddDto.getEndTime(), DateTimeFormatter.ISO_DATE);
+            while (start.isBefore(end)) {
+                String week = todoService.weekToCodeConverter(start.getDayOfWeek().getValue());
+                //설정한 요일과 같은 경우 Todo를 생성한다.
+                if (week.equals(todoSubKind)) {
+                    Todo newTodo = todoAddDto.toEntity();
+                    // 시작일자와 마감일자를 설정
+                    newTodo.setStartTime(start.toString());
+                    newTodo.setEndTime(start.toString());
+                    addedTodos.add(newTodo);
+                    //일주일 뒤로 이동
+                    start = start.plusDays(7);
+                }else{
+                    //다음날로 이동
+                    start = start.plusDays(1);
+                }
+            }
+        }
+
+        return todoService.addTodos(addedTodos).stream().map(addedTodo -> new TodoDto(addedTodo,false)).collect(Collectors.toList());
+    }
+
 
     @ApiOperation(value = "TODO 수정", notes = "메인페이지에서 TODO를 수정한다.")
     @PutMapping
