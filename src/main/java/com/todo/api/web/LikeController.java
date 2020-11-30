@@ -7,6 +7,7 @@ import com.todo.api.domain.service.LikeService;
 import com.todo.api.domain.service.TodoService;
 import com.todo.api.web.message.ErrorMessage;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,7 @@ public class LikeController {
     private final LikeService likeService;
     private final JwtTokenProvider jwtTokenProvider;
 
+    @ApiOperation(value = "좋아요 추가")
     @PostMapping("/{todoId}/like")
     public String onLike(@PathVariable Long todoId, HttpServletRequest request){
         //토큰 취득
@@ -36,6 +38,7 @@ public class LikeController {
         return "like add success";
     }
 
+    @ApiOperation(value = "좋아요 삭제")
     @DeleteMapping("/{todoId}/like")
     public String cancelLike(@PathVariable Long todoId, HttpServletRequest request){
         //토큰 취득

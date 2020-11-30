@@ -23,12 +23,7 @@ public class GalleryController {
     private final GalleryService galleryService;
     private final TodoService todoService;
 
-    @GetMapping("/gallery")
-    public String dispWrite() {
-        return "/gallery";
-    }
-
-    @ApiOperation(value = "filePath 추가", notes = "filePath 데이터를 받아온다.")
+    @ApiOperation(value = "Todo S3이미지 업로드", notes = "filePath 데이터를 받아온다.")
     @PostMapping("/{todoId}/gallery")
     public GalleryDto execWrite(@RequestParam("file") MultipartFile file, @PathVariable Long todoId) throws IOException {
         Todo todo = todoService.getTodo(todoId);
