@@ -24,6 +24,7 @@ public class Oauth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
         http.headers().frameOptions().disable();
         http.authorizeRequests()
                 .antMatchers("/api/**").access("#oauth2.hasScope('read')")
+                .antMatchers("/v2/api-docs","/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/swagger/**").permitAll()
                 .anyRequest().authenticated();
 
         //인증 필요없음 (테스트시에만 사용)
